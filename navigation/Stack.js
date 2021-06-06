@@ -2,12 +2,28 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import Home from "../screens/Movies";
 import Detail from "../screens/Detail";
-import Tabs from "./Tabs";
+import Tab from "./Tabs";
 import * as SplashScreen from "expo-splash-screen";
+import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 
 const Stack = createStackNavigator();
 
-export default () => {
+const getHeaderTitle = (route) => {
+  const name = getFocusedRouteNameFromRoute(route);
+
+  switch (name) {
+    case `Movies`:
+      return "Movies!";
+    case "Tv":
+      return "Tv!";
+    case "Search":
+      return "Search!";
+    default:
+      return `Favourits!`;
+  }
+};
+
+export default (route) => {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -20,7 +36,13 @@ export default () => {
         headerBackTitleVisible: false,
       }}
     >
-      <Stack.Screen name="Tabs" component={Tabs} />
+      <Stack.Screen
+        name="Tab"
+        component={Tab}
+        options={({ route }) => ({
+          headerTitle: getHeaderTitle(route),
+        })}
+      />
       <Stack.Screen name="Detail" component={Detail} />
     </Stack.Navigator>
   );

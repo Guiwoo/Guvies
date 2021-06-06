@@ -7,20 +7,14 @@ import Favs from "../screens/Favs";
 import { Ionicons } from "@expo/vector-icons";
 import { Platform } from "react-native";
 
-const Tabs = createBottomTabNavigator();
+const Tab = createBottomTabNavigator();
 
 const getHeaderName = (route) =>
   route?.state?.routeNames[route.state.index] || "Movies";
 
 export default ({ navigation, route }) => {
-  useLayoutEffect(() => {
-    const name = getHeaderName(route);
-    navigation.setOptions({
-      title: name,
-    });
-  }, [route]);
   return (
-    <Tabs.Navigator
+    <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused }) => {
           let iconName = Platform.OS === "ios" ? "ios-" : "md-";
@@ -50,10 +44,10 @@ export default ({ navigation, route }) => {
         },
       }}
     >
-      <Tabs.Screen name="Movies" component={Movies} />
-      <Tabs.Screen name="Tv" component={Tv} />
-      <Tabs.Screen name="Search" component={Search} />
-      <Tabs.Screen name="Favourites" component={Favs} />
-    </Tabs.Navigator>
+      <Tab.Screen name="Movies" component={Movies} />
+      <Tab.Screen name="Tv" component={Tv} />
+      <Tab.Screen name="Search" component={Search} />
+      <Tab.Screen name="Favourites" component={Favs} />
+    </Tab.Navigator>
   );
 };
