@@ -8,21 +8,6 @@ import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 
 const Stack = createStackNavigator();
 
-const getHeaderTitle = (route) => {
-  const name = getFocusedRouteNameFromRoute(route);
-
-  switch (name) {
-    case `Movies`:
-      return "Movies!";
-    case "Tv":
-      return "Tv!";
-    case "Search":
-      return "Search!";
-    default:
-      return `Favourits!`;
-  }
-};
-
 export default (route) => {
   return (
     <Stack.Navigator
@@ -36,13 +21,7 @@ export default (route) => {
         headerBackTitleVisible: false,
       }}
     >
-      <Stack.Screen
-        name="Tab"
-        component={Tab}
-        options={({ route }) => ({
-          headerTitle: getHeaderTitle(route),
-        })}
-      />
+      <Stack.Screen name="Tab" component={Tab} />
       <Stack.Screen name="Detail" component={Detail} />
     </Stack.Navigator>
   );

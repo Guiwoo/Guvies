@@ -6,13 +6,20 @@ import Search from "../screens/Search";
 import Favs from "../screens/Favs";
 import { Ionicons } from "@expo/vector-icons";
 import { Platform } from "react-native";
+import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 
 const Tab = createBottomTabNavigator();
 
 const getHeaderName = (route) =>
-  route?.state?.routeNames[route.state.index] || "Movies";
+  getFocusedRouteNameFromRoute(route) || "Movies";
 
 export default ({ navigation, route }) => {
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title: getHeaderName(route),
+    });
+  }, [route]);
+
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
