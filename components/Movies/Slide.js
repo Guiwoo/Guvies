@@ -67,7 +67,7 @@ const Slide = ({ id, title, backgroundImage, votes, overview, poster }) => {
       <Content>
         <Poster url={poster} />
         <Data>
-          <Title>{title}</Title>
+          <Title>{trimText(title, 40)}</Title>
           <VotesContainer>
             <Votes votes={votes} />
           </VotesContainer>

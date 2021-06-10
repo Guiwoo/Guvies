@@ -18,13 +18,13 @@ const Title = styled.Text`
   font-weight: 600;
 `;
 
-const Vertical = ({ id, poster, title, vote }) => {
+const Vertical = ({ id, poster, title, votes }) => {
   return (
     <TouchableOpacity>
       <Container>
         <Poster url={poster} />
         <Title>{trimText(title, 20)}</Title>
-        <Votes votes={vote} />
+        <Votes votes={votes} />
       </Container>
     </TouchableOpacity>
   );
@@ -34,7 +34,7 @@ Vertical.propTypes = {
   id: PropTypes.number.isRequired,
   poster: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  vote: PropTypes.number.isRequired,
+  votes: PropTypes.number.isRequired,
 };
 
 export default Vertical;
