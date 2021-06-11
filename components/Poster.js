@@ -9,10 +9,12 @@ const Image = styled.Image`
   border-radius: 4px;
 `;
 
-const Poster = ({ url }) => <Image source={{ uri: apiImage(url) }} />;
+const Poster = ({ url = "../assets/noImage.png" }) => (
+  <Image source={{ uri: apiImage(url) }} />
+);
 
 Poster.propTypes = {
-  url: PropTypes.string.isRequired,
+  url: PropTypes.string,
 };
 
 export default Poster;

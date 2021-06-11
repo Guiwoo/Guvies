@@ -24,7 +24,7 @@ const Vertical = ({ id, poster, title, votes }) => {
       <Container>
         <Poster url={poster} />
         <Title>{trimText(title, 20)}</Title>
-        <Votes votes={votes} />
+        {votes > 0 && <Votes votes={votes} />}
       </Container>
     </TouchableOpacity>
   );
@@ -32,7 +32,7 @@ const Vertical = ({ id, poster, title, votes }) => {
 
 Vertical.propTypes = {
   id: PropTypes.number.isRequired,
-  poster: PropTypes.string.isRequired,
+  poster: PropTypes.string,
   title: PropTypes.string.isRequired,
   votes: PropTypes.number.isRequired,
 };

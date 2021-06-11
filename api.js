@@ -36,8 +36,11 @@ export const tvApi = {
   thisWeek: () => getEverythings("/tv/on_the_air"),
   topRated: () => getEverythings("/tv/top_rated"),
   popular: () => getEverythings("/tv/popular"),
-  search: (query) => getEverythings("search/tv", { query }),
+  search: (query) => getEverythings("/search/tv", { query }),
   show: (id) => getEverythings(`/tv/${id}`),
 };
 
-export const apiImage = (path) => `https://image.tmdb.org/t/p/w500${path}`;
+export const apiImage = (path) =>
+  path
+    ? `https://image.tmdb.org/t/p/w500${path}`
+    : "https://images.unsplash.com/photo-1570800658349-c7051f4d6f57?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80";

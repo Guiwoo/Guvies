@@ -9,6 +9,7 @@ import Horizontal from "../../components/Horizontal";
 import ScrollContainer from "../../components/ScrollContainer";
 import HorizontalSlider from "../../components/HorizontalSlider";
 import List from "../../components/List";
+import SlideContainer from "../../components/SlideContainer";
 
 const { width: WIDTH, height: HEIGHT } = Dimensions.get("window");
 
@@ -24,26 +25,24 @@ const UpcomingContainer = styled.View`
   margin-top: 20px;
 `;
 
-export default ({ loading, nowPlaying, popular, upcoming }) => (
-  <ScrollContainer loading={loading}>
+export default ({ refreshFn, loading, nowPlaying, popular, upcoming }) => (
+  <ScrollContainer refreshFn={refreshFn} loading={loading}>
     <>
-      <SliderContainer>
-        <Swiper controlsEnabled={false} loop timeout={3} height>
-          {nowPlaying?.map((movie) => (
-            <Slide
-              key={movie.id}
-              id={movie.id}
-              title={movie.original_title}
-              overview={movie.overview}
-              backgroundImage={movie.backdrop_path}
-              votes={movie.vote_average}
-              poster={movie.poster_path}
-            />
-          ))}
-        </Swiper>
-      </SliderContainer>
+      <SlideContainer title="❤️ Now Playing">
+        {nowPlaying?.map((movie) => (
+          <Slide
+            key={movie.id}
+            id={movie.id}
+            title={movie.original_title}
+            overview={movie.overview}
+            backgroundImage={movie.backdrop_path}
+            votes={movie.vote_average}
+            poster={movie.poster_path}
+          />
+        ))}
+      </SlideContainer>
       <Container>
-        <HorizontalSlider title={"Popular Movies"}>
+        <HorizontalSlider title={"❤️ Popular Movies"}>
           {popular?.map((movie) => (
             <Vertical
               key={movie.id}
@@ -54,7 +53,7 @@ export default ({ loading, nowPlaying, popular, upcoming }) => (
             />
           ))}
         </HorizontalSlider>
-        <List title={"Coming Soon"}>
+        <List title={"❤️ Coming Soon"}>
           {upcoming?.map((movie) => (
             <Horizontal
               key={movie.id}
