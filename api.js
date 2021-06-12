@@ -27,7 +27,8 @@ export const movieApi = {
   popular: () => getEverythings("/movie/popular"),
   upcoming: () => getEverythings("/movie/upcoming", { region: "kr" }),
   search: (query) => getEverythings("/search/movie", { query }),
-  movie: (id) => getEverythings(`/movie/${id}`),
+  movie: (id) =>
+    getEverythings(`/movie/${id}`, { append_to_response: "videos" }),
   discover: () => getEverythings("/discover/movie"),
 };
 
@@ -37,10 +38,10 @@ export const tvApi = {
   topRated: () => getEverythings("/tv/top_rated"),
   popular: () => getEverythings("/tv/popular"),
   search: (query) => getEverythings("/search/tv", { query }),
-  show: (id) => getEverythings(`/tv/${id}`),
+  show: (id) => getEverythings(`/tv/${id}`, { append_to_response: "videos" }),
 };
 
-export const apiImage = (path) =>
-  path
-    ? `https://image.tmdb.org/t/p/w500${path}`
-    : "https://images.unsplash.com/photo-1570800658349-c7051f4d6f57?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80";
+export const apiImage = (
+  path,
+  defaultPoster = "https://images.unsplash.com/photo-1570800658349-c7051f4d6f57?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80"
+) => (path ? `https://image.tmdb.org/t/p/w500${path}` : defaultPoster);

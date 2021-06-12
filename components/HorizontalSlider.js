@@ -1,12 +1,12 @@
 import React from "react";
-import { ScrollView } from "react-native";
+import { ScrollView, View } from "react-native";
 import Title from "./Title";
 import Vertical from "./Vertical";
 import PropTypes from "prop-types";
 
 const HorizontalSlider = ({ title, children }) => {
   return (
-    <>
+    <View>
       <Title title={title} />
       <ScrollView
         style={{ marginTop: 20, marginBottom: 40 }}
@@ -16,7 +16,7 @@ const HorizontalSlider = ({ title, children }) => {
       >
         {children}
       </ScrollView>
-    </>
+    </View>
   );
 };
 

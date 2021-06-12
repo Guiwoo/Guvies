@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
 import Poster from "./Poster";
-import { apiImage } from "../api";
+import { useNavigation } from "@react-navigation/native";
 import { TouchableOpacity } from "react-native";
 import { formatDate } from "../utils.js";
 
@@ -39,9 +39,27 @@ const Overview = styled.Text`
   color: white;
 `;
 
-const Horizontal = ({ id, title, poster, overview, releaseDate }) => {
+const Horizontal = ({
+  isTv = false,
+  id,
+  title,
+  poster,
+  overview,
+  releaseDate,
+}) => {
+  const navigation = useNavigation();
+  const goToDetail = () => {
+    navigation.navigate("Detail", {
+      isTv,
+      id,
+      title,
+      poster,
+      overview,
+      releaseDate,
+    });
+  };
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={goToDetail}>
       <Container>
         <Poster url={poster} />
         <Data>
