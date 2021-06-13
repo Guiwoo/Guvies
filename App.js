@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import AppLoading from "expo-app-loading";
 import * as Font from "expo-font";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, FontAwesome } from "@expo/vector-icons";
 import { Image, StatusBar } from "react-native";
 import { Asset } from "expo-asset";
 import { NavigationContainer } from "@react-navigation/native";
@@ -26,7 +26,7 @@ export default function App() {
       "https://images.unsplash.com/photo-1570800658349-c7051f4d6f57?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
       require("./assets/noImage.png"),
     ]);
-    const fonts = cacheFonts([Ionicons.font]);
+    const fonts = cacheFonts([Ionicons.font, FontAwesome.font]);
     return Promise.all([...images, ...fonts]);
   };
   const onFinish = () => setIsReady(true);

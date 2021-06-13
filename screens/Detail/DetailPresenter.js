@@ -1,7 +1,8 @@
 import React from "react";
-import { ActivityIndicator, Dimensions } from "react-native";
+import { ActivityIndicator, Dimensions, TouchableOpacity } from "react-native";
 import styled from "styled-components/native";
 import { apiImage } from "../../api";
+import Link from "../../components/Detail/Link";
 import Poster from "../../components/Poster";
 import ScrollContainer from "../../components/ScrollContainer";
 import Votes from "../../components/Votes";
@@ -57,7 +58,7 @@ const InfoValue = styled.Text`
   font-weight: 500;
 `;
 
-export default ({ result, loading }) => {
+export default ({ openBrowser, result, loading }) => {
   return (
     <ScrollContainer
       loading={false}
@@ -69,53 +70,53 @@ export default ({ result, loading }) => {
           <Poster url={result.poster} />
           <Info>
             <Title>{result.title}</Title>
-            {result.votes && <Votes votes={result.votes} />}
+            {result.votes ? <Votes votes={result.votes} /> : null}
           </Info>
         </Contianer>
       </Header>
       <InfoDetail>
-        {result.overview && (
+        {result.overview ? (
           <>
             <InfoName>Overview</InfoName>
             <InfoValue>{result.overview}</InfoValue>
           </>
-        )}
+        ) : null}
         {loading && (
           <ActivityIndicator style={{ marginTop: 30 }} color={"white"} />
         )}
-        {result.spoken_languages && (
+        {result.spoken_languages ? (
           <>
             <InfoName>Language</InfoName>
             <InfoValue>
               {result.spoken_languages.map((l) => `${l.name} `)}
             </InfoValue>
           </>
-        )}
-        {result.release_date && (
+        ) : null}
+        {result.release_date ? (
           <>
             <InfoName>Release Date</InfoName>
             <InfoValue>{formatDate(result.release_date)}</InfoValue>
           </>
-        )}
-        {result.status && (
+        ) : null}
+        {result.status ? (
           <>
             <InfoName>Status</InfoName>
             <InfoValue>{result.status}</InfoValue>
           </>
-        )}
-        {result.runtime && (
+        ) : null}
+        {result.runtime ? (
           <>
             <InfoName>Runtime</InfoName>
             <InfoValue>{result.runtime} minutes</InfoValue>
           </>
-        )}
-        {result.first_air_date && (
+        ) : null}
+        {result.first_air_date ? (
           <>
             <InfoName>First Air Date</InfoName>
             <InfoValue>{formatDate(result.first_air_date)}</InfoValue>
           </>
-        )}
-        {result.genres && (
+        ) : null}
+        {result.genres ? (
           <>
             <InfoName>Genres</InfoName>
             <InfoValue>
@@ -124,15 +125,39 @@ export default ({ result, loading }) => {
               )}
             </InfoValue>
           </>
-        )}
-        {result.number_of_episodes && (
+        ) : null}
+        {result.number_of_episodes ? (
           <>
             <InfoName>Seasons / Episodes</InfoName>
             <InfoValue>
               {result.number_of_seasons} / {result.number_of_episodes}
             </InfoValue>
           </>
-        )}
+        ) : null}
+        {result.imdb_id ? (
+          <Link
+            icon={"imdb"}
+            text={"IMDB Page"}
+            onPress={() =>
+              openBrowser(`https://www.imdb.com/title/${result.imdb_id}`)
+            }
+          />
+        ) : null}
+        {result.videos.results?.length > 0 ? (
+          <>
+            <InfoName>Videos</InfoName>
+            {result.videos.results.map((video) => (
+              <Link
+                text={video.name}
+                key={video.id}
+                icon="youtube-play"
+                onPress={() =>
+                  openBrowser(`https://www.youtube.com/watch?v=${video.key}`)
+                }
+              />
+            ))}
+          </>
+        ) : null}
       </InfoDetail>
     </ScrollContainer>
   );
