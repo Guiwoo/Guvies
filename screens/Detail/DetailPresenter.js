@@ -88,7 +88,11 @@ export default ({ openBrowser, result, loading }) => {
           <>
             <InfoName>Language</InfoName>
             <InfoValue>
-              {result.spoken_languages.map((l) => `${l.name} `)}
+              {result.spoken_languages.map((l, index) =>
+                index + 1 === result.spoken_languages.length
+                  ? `${l.name}`
+                  : `${l.name} / `
+              )}
             </InfoValue>
           </>
         ) : null}
@@ -145,12 +149,12 @@ export default ({ openBrowser, result, loading }) => {
         ) : null}
         {result.videos.results?.length > 0 ? (
           <>
-            <InfoName>Videos</InfoName>
-            {result.videos.results.map((video) => (
+            <InfoName>🍿Trailer</InfoName>
+            {result.videos.results.map((video, index) => (
               <Link
-                text={video.name}
+                text={index < 3 ? video.name : null}
                 key={video.id}
-                icon="youtube-play"
+                icon={index < 3 ? "youtube-play" : null}
                 onPress={() =>
                   openBrowser(`https://www.youtube.com/watch?v=${video.key}`)
                 }
