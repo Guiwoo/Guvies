@@ -69,7 +69,7 @@ export default ({ openBrowser, result, loading }) => {
         <Contianer>
           <Poster url={result.poster} />
           <Info>
-            <Title>{result.title}</Title>
+            <Title>{result.title || result.name}</Title>
             {result.votes ? <Votes votes={result.votes} /> : null}
           </Info>
         </Contianer>

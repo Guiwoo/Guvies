@@ -43,5 +43,5 @@ export const tvApi = {
 
 export const apiImage = (
   path,
-  defaultPoster = "https://images.unsplash.com/photo-1570800658349-c7051f4d6f57?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80"
+  defaultPoster = "https://drive.google.com/file/d/1IKTXX0GMEcHDYOdGoyaUgJKyaSUVVmby/view?usp=sharing"
 ) => (path ? `https://image.tmdb.org/t/p/w500${path}` : defaultPoster);
